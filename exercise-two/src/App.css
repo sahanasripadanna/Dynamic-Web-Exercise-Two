@@ -7,16 +7,45 @@
 }
 
 .App-header {
-  background-color: #282c34;
+/*  background-color: #282c34;*/
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+/*  color: white;*/
 }
 
 .App-link {
   color: #09d3ac;
 }
+
+body{
+  box-sizing: border-box;
+}
+
+.WeatherNav { /*doing css alphabetically helps!!*/
+  align-content: center;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  margin: 20px auto;
+  max-width: 1080px;
+  width: 100%;
+}
+
+.WeatherNav__Item {
+  color: black;
+  font-size: 20px;
+  margin: 0 20px;
+  padding: 10px;
+}
+
+.WeatherNav__Item--active {
+  background-color: gray;
+  color: blue;
+}
+
+
+
