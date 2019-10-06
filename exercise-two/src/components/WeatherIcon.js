@@ -1,9 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudRain, faCloud, faSun, faWind } from '@fortawesome/free-solid-svg-icons';
+import { faCloudRain, faCloud, faSun, faWind, faMoon, faSmog } from '@fortawesome/free-solid-svg-icons';
 
 export default function WeatherIcon({weatherValue}) {
 	console.log('weatherValue', weatherValue);
+	var d = new Date();
+	var n = d.getTime();
+	console.log(n);
 
 	switch(weatherValue){
 		case 'Rain':
@@ -11,25 +14,45 @@ export default function WeatherIcon({weatherValue}) {
 				<FontAwesomeIcon 
 					icon={faCloudRain} 
 					className="WeatherIcon"
-					size="6px"
+					size="lg"
 				/>
 		);
 		case 'Clouds':
 			return( 
 				<FontAwesomeIcon 
-					icon={faCloudRain} 
+					icon={faCloud} 
 					className="WeatherIcon"
-					size="6px"
+					size="lg"
 				/>
 		);
-		case 'Clear':
-			return (
+		case 'Mist':
+			return( 
 				<FontAwesomeIcon 
-					icon={faSun} 
+					icon={faSmog} 
 					className="WeatherIcon"
-					size="6px"
+					size="lg"
 				/>
-				);
+		);	
+
+		case 'Clear':
+			if ((n > 7) && (n < 19)){
+				return (
+					<FontAwesomeIcon 
+						icon={faSun} 
+						className="WeatherIcon"
+						size="lg"
+					/>
+					);
+			}
+			else{
+				return (
+					<FontAwesomeIcon 
+						icon={faMoon} 
+						className="WeatherIcon"
+						size="lg"
+					/>
+					);
+			}
 		default:
 			return <div>{weatherValue}</div>
 	}

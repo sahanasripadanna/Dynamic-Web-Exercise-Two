@@ -7,17 +7,20 @@ import PageWrapper from '../components/PageWrapper'
 const apiKey = '41174326945db514cb5d9e727c0e7a7b'
 
 export default function Home(props){
-	console.log(props)
+	// console.log(props)
 	const [city, setCity] = useState('');
 	const [weather, setWeather] = useState({});
 	const [cloudy, setCloudy] = useState('');
 	const [weatherType, setWeatherType] = useState('');
-	const [mintemp, setTemp] = useState('');
+	const [mintemp, setminTemp] = useState('');
+	const [maxtemp, setmaxTemp] = useState('');
+	const [currtemp, setcurrTemp] = useState('');
+
 
 	function queryWeatherAPI(queryCity){
 		axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${queryCity}&APPID=${apiKey}`)
 		.then(function(response){
-			console.log('response', response);
+			// console.log('response', response);
 			setWeather(response);
 			return response;
 		})
@@ -25,6 +28,11 @@ export default function Home(props){
 			console.log('error', error);
 			return error;
 		});
+	}
+
+	function convert(temp){
+		let Ftemp = Math.round((temp - 273.15) * (9/5) + 32);
+		return Ftemp;
 	}
 
 	useEffect(() =>  {
@@ -37,32 +45,39 @@ export default function Home(props){
 
 	useEffect(() =>  {
 		let mintemp = weather.data ? weather.data.main.temp_min: '';
-		mintemp = (mintemp - 273.15) * (9/5) + 32;
-		setTemp(temp);
-		let getWeatherType = weather.weather ? weather.weather[0].main : '';
-		let getCloudy = weather.clouds ? weather.clouds.all : 0;
+		setminTemp(convert(mintemp));
+		let maxtemp = weather.data ? weather.data.main.temp_max: '';
+		setmaxTemp(convert(maxtemp));
+		let currtemp = weather.data ? weather.data.main.temp: '';
+		setcurrTemp(convert(currtemp));
+
+		let time =  weather.data ? weather.data.sys.sunrise: '';
+		console.log("time", time);
+
+		let getWeatherType = weather.data ? weather.data.weather[0].main : '';
 		setWeatherType(getWeatherType);
-		setCloudy(getCloudy)
+		let getCloudy =weather.data ? weather.data.clouds.all: 0;
+		setCloudy(getCloudy);
 	}, [weather]);
 
 
 	return(
 		<PageWrapper cloudy={cloudy}>
 			<div className = "WeatherNav">
-				<a className= {`WeatherNav__Item ${city === 'Seoul' ? 'WeatherNav__Item---active' : ''}`} href="/?city=Seoul">Seoul</a>
-				<a className= {`WeatherNav__Item ${city === 'London' ? 'WeatherNav__Item---active' : ''}`} href="/?city=London">London</a>
-				<a className= {`WeatherNav__Item ${city === 'Miami' ? 'WeatherNav__Item---active' : ''}`} href="/?city=Miami">Miami</a>
-				<a className= {`WeatherNav__Item ${city === 'Chicago' ? 'WeatherNav__Item---active' : ''}`} href="/?city=Chicago">Chicago</a>
+				<a className= {`WeatherNav__Item ${city === 'New York' ? 'WeatherNav__Item--active' : ''}`} href="/?city=New+York">NYC</a>
+				<a className= {`WeatherNav__Item ${city === 'London' ? 'WeatherNav__Item--active' : ''}`} href="/?city=London">London</a>
+				<a className= {`WeatherNav__Item ${city === 'New Delhi' ? 'WeatherNav__Item--active' : ''}`} href="/?city=New+Delhi">New Delhi</a>
+				<a className= {`WeatherNav__Item ${city === 'San Francisco' ? 'WeatherNav__Item--active' : ''}`} href="/?city=San+Francisco">SF</a>
 			</div>
 			<h1>Weather in <span>{city}</span></h1>
 			<WeatherIcon weatherValue={weatherType}/>
 			<p>Weather: {weather.data ? weather.data.weather[0].main: ''}</p>
-			<p>Current Temperature: {weather.data ? weather.data.main.unit: ''}</p>
-			<p>Humidity: {weather.data ? weather.data.main.humidity: ''}</p>
-			<p>Minimum Temperature: {temp} </p> 
-			<p>Maximum Temperature: {weather.data ? weather.data.main.temp_max: ''}</p>
-			<p>Wind Speed: {weather.data ? weather.data.wind.speed: ''}</p>
-			<p>Cloudiness: {weather.data ? weather.data.clouds.all: ''}%</p>
+			<p>Current Temperature: {currtemp}°F</p>
+			<p>High Temperature: {mintemp}°F </p> 
+			<p>Low Temperature: {maxtemp}°F</p>
+			<p>Humidity: {weather.data ? weather.data.main.humidity: ''}%</p>
+			<p>Cloudiness: {weather.data ? weather.data.clouds.all: 0}%</p>
+			<p>Wind Speed: {weather.data ? weather.data.wind.speed: ''} mph</p>
 
 		</PageWrapper>
 		)
