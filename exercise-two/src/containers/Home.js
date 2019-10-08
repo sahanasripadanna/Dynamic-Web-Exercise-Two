@@ -7,7 +7,11 @@ import PageWrapper from '../components/PageWrapper'
 const apiKey = '41174326945db514cb5d9e727c0e7a7b'
 
 export default function Home(props){
-	// console.log(props)
+	const [error, isError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
+
+	const [success, isSuccess] = useState(false);
+
 	const [city, setCity] = useState('');
 	const [weather, setWeather] = useState({});
 	const [cloudy, setCloudy] = useState('');
@@ -16,16 +20,18 @@ export default function Home(props){
 	const [maxtemp, setmaxTemp] = useState('');
 	const [currtemp, setcurrTemp] = useState('');
 
-
 	function queryWeatherAPI(queryCity){
 		axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${queryCity}&APPID=${apiKey}`)
 		.then(function(response){
 			// console.log('response', response);
 			setWeather(response);
+			isSuccess(true);
 			return response;
 		})
 		.catch(function(error){
 			console.log('error', error);
+			isError(true);
+			setErrorMessage(`${error.status}: ${'Error'}`);
 			return error;
 		});
 	}
@@ -70,6 +76,10 @@ export default function Home(props){
 				<a className= {`WeatherNav__Item ${city === 'San Francisco' ? 'WeatherNav__Item--active' : ''}`} href="/?city=San+Francisco">SF</a>
 			</div>
 			<h1>Weather in <span>{city}</span></h1>
+
+			{error && <div className="errorMessage">{errorMessage}</div>}
+			{success && <div className="successMessage">Weather query successful!</div>}
+
 			<WeatherIcon weatherValue={weatherType}/>
 			<p>Weather: {weather.data ? weather.data.weather[0].main: ''}</p>
 			<p>Current Temperature: {currtemp}°F</p>
