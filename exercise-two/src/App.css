@@ -35,11 +35,16 @@ body{
   font-size: 20px;
   margin: 0 20px;
   padding: 10px;
+  transition: background-color 300ms ease;
 }
 
 .WeatherNav__Item--active {
   background-color: gray;
   color: blue;
+}
+
+.WeatherNav__Item:hover{
+  background-color: gray;
 }
 
 .successMessage{
