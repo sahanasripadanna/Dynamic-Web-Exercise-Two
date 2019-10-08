@@ -7,8 +7,13 @@
 }
 
 
-.App-link {
+/*.App-link {
   color: #09d3ac;
+}*/
+
+.PageWrapper{
+  margin: 0 auto;
+  max-width: 960px;
 }
 
 body{
@@ -37,5 +42,17 @@ body{
   color: blue;
 }
 
+.successMessage{
+  background-color: rgba(179, 255, 191);
+  border: 1px solid green;
+  margin: 20px 100px;
+  padding: 5px;
+  display: block;
+  text-align: center;
+  position: relative;
+  transition: background-color 500ms ease;
+}
 
-
+.successMessage:hover{
+  background-color: rgba(179, 255, 191, .1);
+}
