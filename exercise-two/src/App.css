@@ -45,7 +45,7 @@ body{
 .successMessage{
   background-color: rgba(179, 255, 191);
   border: 1px solid green;
-  margin: 20px 100px;
+  margin: 20px 300px;
   padding: 5px;
   display: block;
   text-align: center;
