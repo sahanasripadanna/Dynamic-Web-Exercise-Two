@@ -35,6 +35,7 @@ body{
   font-size: 20px;
   margin: 0 20px;
   padding: 10px;
+  transition: background-color 300ms ease;
 }
 
 .WeatherNav__Item--active {
@@ -42,10 +43,14 @@ body{
   color: blue;
 }
 
+.WeatherNav__Item:hover{
+  background-color: gray;
+}
+
 .successMessage{
   background-color: rgba(179, 255, 191);
   border: 1px solid green;
-  margin: 20px 100px;
+  margin: 20px 300px;
   padding: 5px;
   display: block;
   text-align: center;

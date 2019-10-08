@@ -11,6 +11,7 @@ export default function Home(props){
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const [success, isSuccess] = useState(false);
+	const [successMessage, setSuccessMessage] = useState('');
 
 	const [city, setCity] = useState('');
 	const [weather, setWeather] = useState({});
@@ -26,6 +27,7 @@ export default function Home(props){
 			// console.log('response', response);
 			setWeather(response);
 			isSuccess(true);
+			setErrorMessage(`${success.status}: ${'Success'}`);
 			return response;
 		})
 		.catch(function(error){
