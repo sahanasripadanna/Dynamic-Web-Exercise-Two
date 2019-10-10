@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
+/*.App-logo {
   height: 40vmin;
-}
+}*/
 
 
 /*.App-link {
@@ -21,13 +21,13 @@ body{
 }
 
 .WeatherNav { /*doing css alphabetically helps!!*/
-  align-content: center;
   justify-content: flex-end;
   display: flex;
   flex-direction: row;
-  margin: 20px auto;
-  max-width: 1080px;
+  /*margin: 20px auto;*/
+  max-width: 1400px;
   width: 100%;
+  
 }
 
 .WeatherNav__Item {
@@ -36,10 +36,11 @@ body{
   margin: 0 20px;
   padding: 10px;
   transition: background-color 300ms ease;
+  text-decoration: none;
 }
 
 .WeatherNav__Item--active {
-  background-color: gray;
+  background-color: lightblue;
   color: blue;
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudRain, faCloud, faSun, faWind, faMoon, faSmog } from '@fortawesome/free-solid-svg-icons';
+import { faCloudRain, faCloud, faSun, faWind, faMoon, faSmog, faSnowflake, faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
 export default function WeatherIcon({weatherValue}) {
 	console.log('weatherValue', weatherValue);
@@ -12,11 +12,19 @@ export default function WeatherIcon({weatherValue}) {
 		case 'Rain':
 			return( 
 				<FontAwesomeIcon 
-					icon={faCloudRain} 
+					icon={faCloudShowersHeavy} 
 					className="WeatherIcon"
 					size="lg"
 				/>
 		);
+		case 'Drizzle':
+			return( 
+				<FontAwesomeIcon 
+					icon={faCloudRain} 
+					className="WeatherIcon"
+					size="lg"
+				/>
+		);	
 		case 'Clouds':
 			return( 
 				<FontAwesomeIcon 
@@ -33,6 +41,25 @@ export default function WeatherIcon({weatherValue}) {
 					size="lg"
 				/>
 		);	
+
+		case 'Haze':
+			return( 
+				<FontAwesomeIcon 
+					icon={faSmog} 
+					className="WeatherIcon"
+					size="lg"
+				/>
+		);
+
+		case 'Snow':
+			return( 
+				<FontAwesomeIcon 
+					icon={faSnowflake} 
+					className="WeatherIcon"
+					size="lg"
+				/>
+		);	
+	
 
 		case 'Clear':
 			if ((n > 7) && (n < 19)){
