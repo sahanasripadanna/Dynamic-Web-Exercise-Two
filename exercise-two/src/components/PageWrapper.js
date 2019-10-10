@@ -3,12 +3,10 @@ import React from 'react'
 export default function PageWrapper({cloudy, children}){
 	const wrapperOpacity = cloudy ? (cloudy * 0.01) : 0;
 	const redValue = ((cloudy+1) / 255) * 255;
-	const greenValue = ((cloudy+1) / 150) * 255;
-	const blueValue = ((cloudy+1) / 2) * 255;
-// set blue value for day?
-// dark value for night
-// const currentDate = new Date();
-// const currentTime = currentDate.getHours();
+	const greenValue = ((cloudy+1) / 200) * 255;
+	const blueValue = ((cloudy+1)/2) * 255;
+
+
 	return(
 		<div style={{
 			height: '100%',

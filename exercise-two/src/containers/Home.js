@@ -21,6 +21,7 @@ export default function Home(props){
 	const [maxtemp, setmaxTemp] = useState('');
 	const [currtemp, setcurrTemp] = useState('');
 
+	
 	function queryWeatherAPI(queryCity){
 		axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${queryCity}&APPID=${apiKey}`)
 		.then(function(response){
@@ -69,6 +70,7 @@ export default function Home(props){
 	}, [weather]);
 
 
+
 	return(
 		<PageWrapper cloudy={cloudy}>
 			<div className = "WeatherNav">
@@ -85,8 +87,8 @@ export default function Home(props){
 			<WeatherIcon weatherValue={weatherType}/>
 			<p>Weather: {weather.data ? weather.data.weather[0].main: ''}</p>
 			<p>Current Temperature: {currtemp}°F</p>
-			<p>High Temperature: {mintemp}°F </p> 
-			<p>Low Temperature: {maxtemp}°F</p>
+			<p>High Temperature: {maxtemp}°F </p> 
+			<p>Low Temperature: {mintemp}°F</p>
 			<p>Humidity: {weather.data ? weather.data.main.humidity: ''}%</p>
 			<p>Cloudiness: {weather.data ? weather.data.clouds.all: 0}%</p>
 			<p>Wind Speed: {weather.data ? weather.data.wind.speed: ''} mph</p>
